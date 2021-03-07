@@ -80,13 +80,14 @@ def tobs():
     session.close()
 
     station_temps = []
-    for temp_date, tobs in temp_results:
+    for date, tobs in temp_results:
         temp_dict = {}
-        temp_dict["date"] = temp_date
+        temp_dict["date"] = date
         temp_dict["tobs"] = tobs
         station_temps.append(temp_dict)
 
         return jsonify(station_temps)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
