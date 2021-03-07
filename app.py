@@ -33,15 +33,15 @@ def precipitation():
     """Return a list of precipitation data including the date"""
     session = Session(engine)
 
-    precip_results = session.query(Measurement.date, Measurement.prcp).all()
+    precip_results = session.query(Measurement.date, Measurement.prcp).filter(Measurement.date >= "2016-08-23").all() 
 
     session.close()
 
     all_precip = []
-    for date, prcp in precip_results:
+    for list_year, list_precip in precip_results:
         prcp_dict = {}
-        prcp_dict["date"] = date
-        prcp_dict["prcp"] = prcp
+        prcp_dict["date"] = list_year
+        prcp_dict["prcp"] = list_precip
         all_precip.append(prcp_dict)
 
     return jsonify(all_precip)
